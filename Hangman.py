@@ -1,11 +1,23 @@
 import random
 
+# Board builder helper
+def build(name):
+    board = []
+    for letter in name:
+        if letter == " ":
+            board.append(" ")
+        else:
+            board.append("_")
+        
+    return board
+
 # Bank of words
-namebank = ["Brian", "Stevo", "Wayne", "Katie", "Tegan", "Monte"]
-board = ["_", "_", "_", "_", "_"]
+namebank = ["Joseph", "Abu Abdo", "Wayne", "Dimitrios", "Tegan", "Gerasimos"]
 guessbank = []
 # Random name generator
 randName = namebank[random.randint(0, len(namebank) - 1)].lower()
+# Board build (call to helper)
+board = build(randName)
 win = False
 strikes = 0
 STRIKE_MAX = 5
@@ -21,7 +33,7 @@ while not win:
     # If -1 entered, quit. Else, continue
     try:
         if int(guess) == -1:
-            print("\n\nBye bye!!")
+            print("\nBye bye!!")
             break
     except:
         guess = guess.lower()
@@ -33,18 +45,18 @@ while not win:
         for letter in randName:
             if letter.lower() == guess:
                 board[index] = guess
-                print(board)
             index += 1
             # Win condition
             if ''.join(board) == randName:
-                print("\n\nYou win!!!")
                 win = True
                 break
+        print(board)
     # Incorrect guess handle (increment strike)
     else:
         strikes += 1
         print("\nIncorrect, you have " + str(STRIKE_MAX - strikes) + " strikes left.")
     
+
     # Fill guessbank with unique guesses
     if guess not in guessbank and not win:
         guessbank.append(guess)
@@ -57,5 +69,8 @@ while not win:
         win = False
         break
 
-exit()
+# Win print
+if win:
+    print("\nYou win!!!")
 
+exit()
