@@ -16,5 +16,3 @@ while True:
         print("Ehh, wrong. The correct number was " + str(rand))
 
 exit()
-
-#Test
