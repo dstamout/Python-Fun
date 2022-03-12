@@ -24,8 +24,6 @@ STRIKE_MAX = 5
 
 print("Welcome to hangman! Guess by entering a letter, and try to guess the full word!")
 
-print(randName)
-
 # Game loop
 while not win:
     guess = input("\nEnter any letter (or -1 to quit): ")
@@ -50,12 +48,11 @@ while not win:
             if ''.join(board) == randName:
                 win = True
                 break
-        print(board)
+        print("\n" + ' '.join(board))
     # Incorrect guess handle (increment strike)
     else:
         strikes += 1
         print("\nIncorrect, you have " + str(STRIKE_MAX - strikes) + " strikes left.")
-    
 
     # Fill guessbank with unique guesses
     if guess not in guessbank and not win:
