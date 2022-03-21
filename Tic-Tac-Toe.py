@@ -5,10 +5,14 @@ def print2D(array):
         print()
 
 def modify2DX(array, r, c):
+    if not 0 <= r <= 2 or not 0 <= c <= 2 or array[r][c] != "-":
+        raise ValueError
     array[r][c] = "X"
     print2D(array)
 
 def modify2DO(array, r, c):
+    if not 0 <= r <= 2 or not 0 <= c <= 2 or array[r][c] != "-":
+        raise ValueError
     array[r][c] = "O"
     print2D(array)
 
@@ -48,13 +52,20 @@ def checkWinner(array):
     return 0
 
 board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
+rowX, colX, rowO, colO = -1, -1, -1, -1
 print2D(board)
 print("Welcome to Tic-Tac-Toe! Rows and columns start at 0.")
 
 while True:
-    rowX = input("\nX is up. \nPlease input what row X would like to play: ")
-    colX = input("\nPlease input what column X would like to play: ")
-    modify2DX(board, int(rowX), int(colX))
+    while True:
+        try:
+            rowX = int(input("\nX is up. \nPlease input what row X would like to play: "))
+            colX = int(input("\nPlease input what column X would like to play: "))
+            modify2DX(board, rowX, colX)
+            break
+        except ValueError:
+            print("Invalid input. Inputs must be an integer within bounds 0 - 2 and located at a space unfilled.")
+            print2D(board)
 
     if filled(board):
         break
@@ -63,9 +74,15 @@ while True:
         print(checkWinner(board))
         break
 
-    rowO = input("\nO is next. \nPlease input what row O would like to play: ")
-    colO = input("\nPlease input what column O would like to play: ")
-    modify2DO(board, int(rowO), int(colO))
+    while True:
+        try:
+            rowO = int(input("\nO is next. \nPlease input what row O would like to play: "))
+            colO = int(input("\nPlease input what column O would like to play: "))
+            modify2DO(board, rowO, colO)
+            break
+        except ValueError:
+            print("Invalid input. Input must be an integer within bounds 0 - 2 and located at a space unfilled.")
+            print2D(board)
 
     if checkWinner(board) != 0:
         print(checkWinner(board))
