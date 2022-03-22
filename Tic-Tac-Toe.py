@@ -21,12 +21,11 @@ def modify2DO(array, r, c):
 
 # Checks if board is filled
 def filled(array):
-    filled = False
+    filled = True
     for r in array:
-        if "-" not in r:
-            filled = True
-        else:
+        if "-" in r:
             filled = False
+            break
     return filled
 
 # Checks win for all rows
